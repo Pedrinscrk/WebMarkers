@@ -1,0 +1,262 @@
+/* Reset e Variáveis */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total */
+}
+
+:root {
+    --primary-bg: #000000;
+    --text-light: #ffffff;
+    --accent-color: #00ff88;
+    --transition: all 0.3s ease;
+    --header-height: 80px; /* Variável para a altura do header */
+}
+
+
+
+/* Navbar */
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0; /* Adicionado para garantir alinhamento */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5%; /* Padding horizontal responsivo */
+    background: rgba(0, 0, 0, 0.95);
+    height: var(--header-height); /* Usa a variável */
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+/* Logo */
+.logo img {
+    display: block; /* Evita espaço extra abaixo da imagem */
+    height: 50px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.05);
+}
+
+/* Menu Container (Links + Botão Orçamento) */
+.menu-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Reduzido um pouco o gap para telas menores */
+}
+
+/* Links do Menu */
+.menu-links {
+    display: flex;
+    gap: 1.5rem; /* Reduzido um pouco o gap */
+    list-style: none;
+    margin: 0; /* Reset explícito */
+    padding: 0; /* Reset explícito */
+}
+
+.menu-links li {
+    position: relative;
+}
+
+.menu-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 5px 0;
+    white-space: nowrap; /* Evita quebra de linha nos links */
+}
+
+.menu-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: var(--transition);
+}
+
+.menu-links a:hover::after,
+.menu-links a:focus::after { /* Adiciona foco para acessibilidade */
+    width: 100%;
+}
+
+.menu-links a:hover,
+.menu-links a:focus { /* Adiciona foco para acessibilidade */
+    color: var(--accent-color);
+    outline: none; /* Remove outline padrão se o ::after for suficiente */
+}
+
+/* Botão Orçamento */
+.btn-orcamento {
+    padding: 10px 25px; /* Ajuste leve no padding */
+    border: 2px solid var(--accent-color);
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    border-radius: 30px;
+    font-size: 0.95rem; /* Leve ajuste no tamanho da fonte */
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Evita quebra de linha no botão */
+    text-align: center; /* Garante centralização */
+}
+
+.btn-orcamento:hover,
+.btn-orcamento:focus { /* Adiciona foco para acessibilidade */
+    background: transparent;
+    color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+    outline: none; /* Remove outline padrão no foco */
+}
+
+/* Ícone Hamburguer (Toggler) */
+.navbar-toggler {
+    display: none; /* Escondido por padrão (Desktop) */
+    background: transparent;
+    border: none; /* Removido borda padrão, pode ser estilizada se necessário */
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 1001; /* Garante que fique acima do menu */
+    /* Adiciona box-sizing explicitamente (embora o * já faça) */
+    box-sizing: border-box;
+}
+
+.navbar-toggler:focus {
+    outline: 2px solid var(--accent-color); /* Melhora acessibilidade no foco */
+    outline-offset: 2px;
+}
+
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 1.8em; /* Aumentado um pouco para melhor toque */
+    height: 1.8em; /* Aumentado um pouco para melhor toque */
+    vertical-align: middle;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* Linhas um pouco mais grossas e cor mais opaca */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+/* Estilos Mobile / Responsivos */
+@media (max-width: 992px) { /* Ponto de quebra ajustado para tablets/telas menores */
+    .navbar {
+        padding: 15px 3%; /* Reduz padding em telas menores */
+    }
+
+    .menu-container {
+        gap: 1rem; /* Reduz mais o gap */
+    }
+    .menu-links {
+        gap: 1rem; /* Reduz mais o gap */
+        font-size: 0.95rem; /* Reduz fonte dos links */
+    }
+    .btn-orcamento {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px; /* Padding para mobile */
+        /* flex-wrap: nowrap; */ /* Removido - desnecessário com a estrutura atual */
+    }
+
+    .logo img {
+        height: 45px; /* Logo ligeiramente menor no mobile */
+    }
+
+    .navbar-toggler {
+        display: block; /* Mostra o botão hamburguer */
+        order: 2; /* Coloca depois do logo */
+        /* margin-left: auto; */ /* Removido - justify-content: space-between no .navbar cuida disso */
+    }
+
+    .menu-container {
+        /* Estilos para o menu dropdown */
+        position: absolute;
+        top: var(--header-height); /* Alinha abaixo do header usando a variável */
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.98); /* Fundo um pouco mais claro para contraste */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem 20px; /* Mais padding interno no dropdown */
+        display: none; /* Escondido por padrão */
+        flex-direction: column;
+        align-items: stretch; /* Faz itens internos esticarem */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra mais pronunciada */
+        gap: 0; /* Remove gap do flex container, controla espaçamento nos filhos */
+    }
+
+    .menu-container.active {
+        display: flex; /* Mostra o menu quando ativo */
+        animation: slideDown 0.3s ease-out; /* Animação mais suave */
+    }
+
+    .menu-links {
+        flex-direction: column; /* Links em coluna */
+        gap: 0; /* Remove gap, controla com padding/margin nos 'li' ou 'a' */
+        width: 100%;
+        text-align: center; /* Centraliza texto dos links */
+        margin-bottom: 1.5rem; /* Espaço entre links e botão */
+    }
+
+    .menu-links li {
+       width: 100%; /* Garante que o 'li' ocupe a largura */
+    }
+
+    .menu-links a {
+       display: block; /* Faz o link ocupar a largura do 'li' */
+       padding: 12px 10px; /* Aumenta área de clique */
+       border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Linha separadora sutil */
+       font-size: 1.1rem; /* Fonte maior para mobile */
+    }
+     .menu-links li:last-child a {
+        border-bottom: none; /* Remove borda do último link */
+     }
+
+    .menu-links a::after {
+        display: none; /* Remove o sublinhado hover no mobile */
+    }
+    .menu-links a:hover,
+    .menu-links a:focus {
+        background-color: rgba(255, 255, 255, 0.05); /* Feedback visual no hover/focus */
+        color: var(--accent-color);
+    }
+
+
+    .btn-orcamento {
+        width: 100%; /* Botão ocupa largura total */
+        padding: 15px 20px; /* Padding maior para toque */
+        font-size: 1rem; /* Tamanho de fonte adequado */
+        /* margin-top: 1.5rem; */ /* Adicionado margin-top para garantir espaço */
+                                /* O margin-bottom do .menu-links já deve fazer isso, mas isso reforça */
+    }
+}
+
+/* Animação do Dropdown */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

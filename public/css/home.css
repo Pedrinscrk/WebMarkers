@@ -1,0 +1,816 @@
+/* style.css - Completo e Corrigido */
+
+/* Reset Básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Rolagem suave para links internos como #planos */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #080808; /* Definindo o fundo padrão como escuro */
+    line-height: 1.6;
+    color: #ffffff; /* Cor de texto padrão */
+}
+
+/* Seção Hero - Tela Cheia */
+.hero-section {
+    height: 100vh; /* Faz a seção ocupar a altura total da tela */
+    min-height: 600px; /* Altura mínima caso 100vh seja muito pequeno */
+    background-color: #080808;
+    color: #ffffff;
+    display: flex; /* Habilita flexbox */
+    align-items: center; /* Centraliza o .container verticalmente */
+    justify-content: center; /* Centraliza o .container horizontalmente */
+    position: relative;
+    overflow: hidden;
+    /* Grade sutil animada */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px; /* Aumenta um pouco o tamanho da grade */
+    background-position: 0 0; /* Posição inicial */
+    animation: moveGrid 40s linear infinite; /* Animação da grade */
+    /* padding: 80px 0; */ /* REMOVIDO - Flexbox cuida do alinhamento */
+    z-index: 11; /* Aumenta o z-index para ficar acima da seção de clientes */
+}
+
+/* Container Principal */
+.container {
+    max-width: 1140px;
+    width: 90%; /* Garante que não fique colado nas bordas em telas largas */
+    margin: 0 auto; /* Necessário com width: 90% */
+    padding: 0 20px; /* Mantém padding lateral */
+    position: relative;
+    z-index: 2;
+}
+
+/* Conteúdo da Seção (Flex Container) */
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Aumenta um pouco o espaço */
+    width: 100%; /* Ocupa a largura do container */
+}
+
+/* Coluna de Texto */
+.hero-text {
+    flex: 1.1; /* Dá um pouco mais de espaço para o texto */
+    max-width: 55%; /* Ajusta limite */
+}
+
+.hero-text h1 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem); /* Tamanho de fonte responsivo */
+    font-weight: 700; /* Mais peso no título principal */
+    line-height: 1.25;
+    margin-bottom: 15px; /* Reduz margem */
+}
+
+.hero-text h1 .highlight {
+    color: #00e676;
+    font-weight: 700;
+}
+
+/* Estilo para a segunda parte do H1 */
+.hero-text h1 .subtitle-highlight {
+  display: block;
+  font-size: clamp(1.4rem, 3vw, 1.8rem); /* Responsivo */
+  font-weight: 400;
+  color: #e0e0e0;
+  margin-top: 8px; /* Ajusta espaço */
+  line-height: 1.4;
+}
+
+.hero-text p {
+    font-size: clamp(1rem, 2vw, 1.1rem); /* Responsivo */
+    color: #cccccc;
+    margin-bottom: 35px; /* Aumenta margem */
+    max-width: 500px; /* Limita largura do parágrafo */
+}
+
+/* Botão CTA */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px; /* Aumenta espaço */
+    background-color: #00e676;
+    color: #111111;
+    padding: 14px 38px; /* Ajusta padding */
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: clamp(0.95rem, 2.2vw, 1.05rem); /* Responsivo */
+    transition: all 0.3s ease; /* Transição em todas as propriedades */
+    border: 2px solid #00e676;
+    box-shadow: 0 4px 15px rgba(0, 230, 118, 0.2); /* Sombra sutil */
+}
+
+.cta-button i {
+    font-size: 1.3rem; /* Aumenta ícone */
+    line-height: 1;
+    transition: transform 0.3s ease; /* Adiciona transição ao ícone */
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: #00e676;
+    transform: translateY(-4px) scale(1.02); /* Efeito mais pronunciado */
+    box-shadow: 0 6px 20px rgba(0, 230, 118, 0.3);
+}
+
+.cta-button:hover i {
+    transform: translateX(3px); /* Move ícone levemente no hover */
+}
+
+/* Prova Social */
+.social-proof {
+    margin-top: 45px; /* Aumenta espaço */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.social-proof i {
+  font-size: 1.6rem; /* Aumenta ícone */
+  color: #00e676;
+  vertical-align: middle;
+}
+
+.social-proof span {
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem); /* Responsivo */
+    color: #bbbbbb;
+}
+
+/* Coluna da Imagem */
+.hero-image {
+    flex: 0.9; /* Reduz um pouco o espaço da imagem */
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 110%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 15px rgba(0, 230, 118, 0.1)); /* Sombra na imagem */
+}
+
+
+/* --- Animação Tecnológica de Fundo (Refinada) --- */
+
+/* Estilo base para as linhas */
+.tech-line {
+    position: absolute;
+    z-index: 1;
+    /* Gradiente mais brilhante na "cabeça" */
+    background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.8) 5%, rgba(0, 230, 118, 0.3) 70%, transparent);
+    opacity: 0;
+    animation: moveAcross 10s linear infinite; /* Aumenta duração base */
+    pointer-events: none;
+    border-radius: 2px; /* Pequeno arredondamento */
+    box-shadow: 0 0 10px rgba(0, 230, 118, 0.3); /* Brilho sutil */
+}
+
+/* Linhas Horizontais */
+.tech-line.line-fast {
+    top: 20%; left: -15%; width: 25%; height: 2px;
+    animation-duration: 7s; animation-delay: 0.2s;
+}
+.tech-line.line-medium {
+    top: 55%; left: -25%; width: 35%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 200, 230, 0.7) 5%, rgba(0, 200, 230, 0.2) 70%, transparent); /* Ciano */
+    box-shadow: 0 0 10px rgba(0, 200, 230, 0.3);
+    animation-duration: 12s; animation-delay: 2s;
+}
+.tech-line.line-slow {
+    bottom: 15%; left: -10%; width: 20%; height: 1px;
+    animation-duration: 16s; animation-delay: 4s;
+}
+
+/* Linhas Verticais */
+.tech-line.line-vertical-fast {
+    top: -15%; left: 90%; width: 2px; height: 25%;
+    background: linear-gradient(180deg, transparent, rgba(0, 230, 118, 0.8) 5%, rgba(0, 230, 118, 0.3) 70%, transparent);
+    animation: moveDown 8s linear infinite;
+    animation-delay: 1s;
+}
+.tech-line.line-vertical-slow {
+    top: -25%; left: 15%; width: 1px; height: 35%;
+    background: linear-gradient(180deg, transparent, rgba(0, 200, 230, 0.6) 5%, rgba(0, 200, 230, 0.2) 70%, transparent); /* Ciano */
+     box-shadow: 0 0 10px rgba(0, 200, 230, 0.3);
+    animation: moveDown 15s linear infinite;
+    animation-delay: 5s;
+}
+
+/* Pontos/Nós Pulsantes */
+.tech-dot {
+    position: absolute;
+    z-index: 1;
+    width: 5px; height: 5px; /* Tamanho base */
+    background-color: rgba(0, 230, 118, 0.9); /* Mais opaco */
+    border-radius: 50%;
+    border: 1px solid rgba(0, 230, 118, 0.3); /* Borda sutil */
+    /* Brilho mais intenso */
+    box-shadow: 0 0 6px rgba(0, 230, 118, 0.7), 0 0 12px rgba(0, 230, 118, 0.4), 0 0 18px rgba(0, 230, 118, 0.2);
+    animation: pulseDot 2.5s ease-in-out infinite alternate; /* Duração e timing */
+    pointer-events: none;
+}
+
+/* Variações dos pontos */
+.tech-dot.dot-1 { top: 20%; left: 25%; animation-duration: 2.2s; animation-delay: 0.1s; }
+.tech-dot.dot-2 { top: 75%; left: 12%; animation-duration: 3s; animation-delay: 1.8s; background-color: rgba(0, 200, 230, 0.8); border-color: rgba(0, 200, 230, 0.3); box-shadow: 0 0 6px rgba(0, 200, 230, 0.6), 0 0 12px rgba(0, 200, 230, 0.4), 0 0 18px rgba(0, 200, 230, 0.2); /* Ciano */}
+.tech-dot.dot-3 { top: 85%; left: 80%; animation-duration: 2.6s; animation-delay: 3.5s; width: 6px; height: 6px;}
+.tech-dot.dot-4 { top: 10%; left: 65%; animation-duration: 3.2s; animation-delay: 4.2s; width: 4px; height: 4px; background-color: rgba(0, 200, 230, 0.8); border-color: rgba(0, 200, 230, 0.3); box-shadow: 0 0 6px rgba(0, 200, 230, 0.6), 0 0 12px rgba(0, 200, 230, 0.4), 0 0 18px rgba(0, 200, 230, 0.2); /* Ciano */}
+
+
+/* Keyframes das Animações */
+
+@keyframes moveGrid {
+    0% { background-position: 0 0; }
+    100% { background-position: 80px 80px; } /* Move a grade diagonalmente */
+}
+
+@keyframes moveAcross {
+    0% { transform: translateX(0); opacity: 0; }
+    15% { opacity: 0.6; } /* Aparece mais rápido */
+    85% { opacity: 0.6; } /* Permanece visível */
+    100% { transform: translateX(140vw); opacity: 0; } /* Distância um pouco menor */
+}
+
+@keyframes moveDown {
+     0% { transform: translateY(0); opacity: 0; }
+    15% { opacity: 0.6; }
+    85% { opacity: 0.6; }
+    100% { transform: translateY(120vh); opacity: 0; }
+}
+
+@keyframes pulseDot {
+    0% {
+        transform: scale(0.7);
+        opacity: 0.6;
+        box-shadow: 0 0 4px rgba(0, 230, 118, 0.4), 0 0 8px rgba(0, 230, 118, 0.2); /* Brilho reduzido no mínimo */
+    }
+     /* Estado intermediário para pulso mais orgânico */
+    50% {
+         transform: scale(1.1);
+         opacity: 0.8;
+    }
+    100% {
+        transform: scale(1); /* Termina no tamanho normal */
+        opacity: 1;
+        /* Brilho máximo no estado final */
+        box-shadow: 0 0 8px rgba(0, 230, 118, 0.8), 0 0 16px rgba(0, 230, 118, 0.5), 0 0 24px rgba(0, 230, 118, 0.3);
+    }
+}
+
+
+/* --- Responsividade --- */
+
+@media (max-width: 992px) {
+     .hero-content { gap: 30px; }
+     .hero-text { max-width: 55%; flex: 1; }
+     .hero-image { flex: 1; }
+
+    /* Ajusta animação */
+    .tech-line.line-medium { width: 35%; }
+    .tech-line.line-vertical-slow { height: 35%; }
+}
+
+
+@media (max-width: 768px) {
+    .hero-section {
+        /* Manter altura ou permitir que conteúdo defina? Manter 100vh por enquanto */
+        /* height: auto; min-height: 100vh; */ /* Alternativa se conteúdo transbordar */
+        padding: 60px 0; /* Adiciona padding para garantir espaço se 100vh for pequeno */
+        height: auto; /* Deixa o conteúdo definir a altura */
+        min-height: calc(100vh - 60px - 60px); /* Tenta preencher a tela descontando padding */
+        align-items: center; /* Mantém centralizado */
+        background-size: 50px 50px; /* Grade ainda maior */
+    }
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px; /* Espaço entre imagem e texto */
+    }
+    .hero-text {
+        max-width: 90%; /* Limita largura do texto */
+        order: 2;
+        margin-top: 0; /* Removido, gap controla */
+    }
+     .hero-image {
+        order: 1;
+        max-width: 60%; /* Reduz imagem significativamente */
+        margin: 0 auto 20px auto; /* Adiciona margem abaixo da imagem */
+    }
+     .hero-text p {
+         max-width: 100%; /* Remove limite de largura no mobile */
+         margin-bottom: 30px;
+     }
+     .cta-button { width: auto; } /* Remove largura fixa */
+     .social-proof { justify-content: center; }
+
+     /* Reduzir animações no mobile */
+    .tech-line.line-medium, .tech-line.line-vertical-slow, .tech-dot.dot-3, .tech-dot.dot-4 { display: none; }
+     .tech-line.line-fast { top: 10%; width: 45%; animation-duration: 9s;}
+     .tech-line.line-vertical-fast { left: 90%; height: 20%; animation-duration: 10s;}
+     .tech-dot.dot-1 { top: 88%; left: 10%; }
+     .tech-dot.dot-2 { top: 5%; left: 85%; } /* Move para outro canto */
+}
+
+@media (max-width: 480px) {
+      .hero-text h1 { font-size: clamp(1.8rem, 8vw, 2.2rem); } /* Usa clamp */
+      .hero-text h1 .subtitle-highlight { font-size: clamp(1.2rem, 5vw, 1.4rem); }
+      .hero-text p { font-size: 0.95rem; }
+      .hero-image { max-width: 75%; } /* Aumenta um pouco relativo ao 768px */
+      .cta-button { width: 85%; justify-content: center; margin: 0 auto; display: flex; padding: 12px 25px; }
+      .social-proof { gap: 8px; }
+      .social-proof span { font-size: 0.85rem; }
+      .social-proof i { font-size: 1.3rem; }
+
+      /* Simplifica mais a animação */
+      .tech-line.line-vertical-fast, .tech-dot.dot-2 { display: none; }
+      .tech-line.line-fast { width: 60%; }
+      .tech-dot.dot-1 { top: 90%; left: 8%; }
+      .hero-section { background-image: none; } /* Remove grade */
+}
+
+
+
+
+/* --- Seção Logos Clientes --- */
+.client-logos-section {
+    background-color: #080808; /* Cor de fundo escura */
+    padding: 25px 0; /* Espaçamento vertical */
+    border-top: 1px solid #00e676; /* Linha superior azul sutil */
+    border-bottom: 1px solid #00e676; /* Linha inferior azul sutil */
+    color: #ffffff;
+    position: relative; /* Mantém no fluxo normal da página */
+    z-index: 10; /* Evita sobreposição indesejada */
+    /* REMOVIDO: margin-top: 50px; */ /* Evita que fique colado no topo (ajuste conforme necessário) */
+}
+
+.client-logos-section .container {
+    max-width: 1200px; /* Largura padrão */
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex; /* Alinha label e área de rolagem */
+    align-items: center;
+    gap: 30px; /* Espaço entre o label e os logos */
+}
+
+.logos-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #e0e0e0;
+    white-space: nowrap; /* Evita quebra de linha */
+    flex-shrink: 0; /* Mantém o tamanho do label */
+}
+
+.logos-scroll-container {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    overflow: hidden; /* Esconde conteúdo extra */
+    position: relative; /* Necessário para efeito de fade */
+
+    /* Efeito de Fade nas Laterais */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.logos-slide {
+    display: flex;
+    align-items: center;
+    --logo-count: 6; /* Ajuste conforme o número real de logos */
+    --logo-width: 150px; /* Largura média de cada logo */
+    --gap: 60px; /* Espaçamento entre os logos */
+    width: calc(var(--logo-count) * (var(--logo-width) + var(--gap))); /* Largura total */
+    
+    /* Animação de rolagem */
+    animation: scrollLogos 30s linear infinite;
+}
+
+.logos-scroll-container:hover .logos-slide {
+    animation-play-state: paused; /* Pausa animação no hover */
+}
+
+.logos-slide img {
+    height: 45px; /* Altura dos logos */
+    width: auto; /* Mantém proporção */
+    margin: 0 30px; /* Espaçamento horizontal */
+    flex-shrink: 0;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    filter: brightness(0) invert(1) grayscale(100%); /* Mantém logos brancos */
+}
+
+.logos-slide img:hover {
+    opacity: 1; /* Destaque no hover */
+}
+
+/* Animação de Rolagem */
+@keyframes scrollLogos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-1 * var(--logo-count) * (var(--logo-width) + var(--gap))));
+    }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .client-logos-section .container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    .logos-label {
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+    .logos-slide img {
+        height: 35px;
+        margin: 0 20px;
+    }
+    .logos-slide {
+        --logo-width: 120px;
+        --gap: 40px;
+        animation-duration: 25s;
+    }
+    .logos-scroll-container {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+}
+
+@media (max-width: 480px) {
+    .logos-slide img {
+        height: 30px;
+        margin: 0 15px;
+    }
+    .logos-slide {
+        --logo-width: 100px;
+        --gap: 30px;
+        animation-duration: 20s;
+    }
+}
+
+
+
+
+:root {
+    --bg-color: #05020f; /* Fundo bem escuro */
+    --primary-violet: #8A2BE2; /* Violeta como cor principal */
+    --accent-cyan: #00F5FF; /* Ciano/Turquesa como destaque */
+    --card-bg-base: rgba(22, 19, 41, 0.6); /* Base do card semi-transparente */
+    --card-bg-lite-hover: rgba(30, 25, 50, 0.7);
+    --card-bg-pro: rgba(40, 30, 70, 0.7); /* Fundo pro mais roxo */
+    --border-glow-pro: rgba(0, 245, 255, 0.5); /* Brilho ciano */
+    --border-color-base: rgba(138, 43, 226, 0.2); /* Borda violeta sutil */
+    --border-color-hover: rgba(0, 245, 255, 0.7);
+    --text-light: #f0f0f5;
+    --text-medium: #a0a0b5;
+    --text-dark: #1f2937;
+    --white: #ffffff;
+    --font-primary: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: linear-gradient(to bottom, var(--bg-color), #0a051a);
+    color: var(--text-light);
+    font-family: var(--font-primary);
+    line-height: 1.7;
+    overflow-x: hidden; /* Evita scroll horizontal caso algo escape */
+}
+
+/* === Seção Principal === */
+.pricing-section-enhanced {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-section-enhanced::before,
+.pricing-section-enhanced::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: 0;
+    opacity: 0.7;
+}
+.pricing-section-enhanced::before {
+    width: 350px;
+    height: 350px;
+    background-color: rgba(138, 43, 226, 0.15);
+    top: 0%;
+    left: 5%;
+}
+.pricing-section-enhanced::after {
+    width: 300px;
+    height: 300px;
+    background-color: rgba(0, 245, 255, 0.1);
+    bottom: 0%;
+    right: 5%;
+}
+
+.section-title {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+}
+
+.guarantee-text {
+    color: var(--text-medium);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px !important;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+}
+
+/* === Cards de Preço === */
+.pricing-card-enhanced {
+    background-color: var(--card-bg-base);
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color-base);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.pricing-card-enhanced:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--border-color-hover);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-card-enhanced.lite:hover {
+    background-color: var(--card-bg-lite-hover);
+}
+
+.pricing-card-enhanced.pro {
+    background-color: var(--card-bg-pro);
+    border-color: transparent;
+    box-shadow: 0 0 25px var(--border-glow-pro),
+                0 0 45px rgba(138, 43, 226, 0.3),
+                0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.pricing-card-enhanced.pro:hover {
+    box-shadow: 0 0 40px var(--border-glow-pro),
+                0 0 60px rgba(138, 43, 226, 0.4),
+                0 15px 50px rgba(0, 0, 0, 0.5);
+    border-color: var(--accent-cyan);
+}
+
+/* Ribbon "Mais Popular" */
+.popular-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    z-index: 2;
+}
+.popular-ribbon span {
+    position: absolute;
+    display: block;
+    width: 180px;
+    padding: 10px 0;
+    background-color: var(--accent-cyan);
+    color: var(--text-dark);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    transform: rotate(45deg) translateY(-45px) translateX(10px);
+    box-shadow: 0 4px 10px rgba(0, 245, 255, 0.3);
+    right: -40px;
+    top: 30px;
+}
+
+/* Conteúdo Interno do Card */
+.card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.plan-title {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.price-display {
+    color: var(--white);
+    margin-bottom: 25px !important;
+}
+.price-display .currency {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-medium);
+    vertical-align: top;
+    margin-right: 4px;
+}
+.price-display .amount {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+.price-display .cents {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    vertical-align: super;
+    margin-left: 2px;
+}
+.price-display .period {
+    font-size: 1rem;
+    color: var(--text-medium);
+    font-weight: 400;
+    margin-left: 8px;
+    text-transform: lowercase;
+}
+
+.card-divider {
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, var(--border-color-base), transparent);
+    margin: 25px 0;
+}
+.pro .card-divider {
+     background-image: linear-gradient(to right, transparent, var(--border-glow-pro), transparent);
+}
+
+/* Botões */
+.btn-subscribe-enhanced {
+    width: 100%;
+    padding: 16px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+    text-decoration: none;
+}
+
+.btn-lite {
+    background-color: rgba(138, 43, 226, 0.2);
+    color: var(--text-light);
+    border: 1px solid var(--border-color-base);
+}
+.btn-lite:hover {
+    background-color: rgba(138, 43, 226, 0.4);
+    color: var(--white);
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+}
+
+.btn-pro {
+    background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--primary-violet) 100%);
+    color: var(--white);
+    box-shadow: 0 6px 20px rgba(0, 245, 255, 0.3);
+}
+.btn-pro:hover {
+    background: linear-gradient(90deg, var(--primary-violet) 0%, var(--accent-cyan) 100%);
+    color: var(--white);
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+}
+.btn-pro i {
+    color: gold;
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+.btn-pro:hover i {
+    transform: scale(1.1) rotate(15deg);
+}
+
+/* Lista de Features */
+.features-list {
+    margin-top: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.features-list li {
+    margin-bottom: 16px;
+    color: var(--text-medium);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: flex-start;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+.pricing-card-enhanced:hover .features-list li {
+     color: var(--text-light);
+}
+
+.features-list li i {
+    color: var(--primary-violet);
+    margin-right: 12px;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-top: 2px;
+}
+.pro .features-list li i {
+    color: var(--accent-cyan);
+}
+.pricing-card-enhanced:hover .features-list li i {
+    transform: scale(1.1);
+}
+
+/* Nota de Rodapé */
+.footer-note {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+}
+
+
+/* === Responsividade === */
+@media (max-width: 991.98px) { /* Abaixo do LG (tablets e abaixo) */
+    .section-title {
+        font-size: 2.4rem;
+    }
+     /* Faz os cards empilharem (comportamento padrão do col-lg-* abaixo de lg) */
+     /* Adiciona margem inferior para espaçamento quando empilhados */
+    .pricing-card-enhanced {
+        padding: 30px;
+        margin-bottom: 30px; /* Adiciona espaço entre cards quando empilhados */
+    }
+    .row > div:last-child .pricing-card-enhanced {
+       margin-bottom: 0; /* Remove margem do último card */
+    }
+
+    .price-display .amount {
+        font-size: 3.5rem;
+    }
+    .price-display .currency,
+    .price-display .cents {
+        font-size: 1.5rem;
+    }
+     .popular-ribbon {
+         width: 110px; height: 110px;
+     }
+     .popular-ribbon span {
+         width: 160px; padding: 8px 0; font-size: 0.75rem;
+          transform: rotate(45deg) translateY(-35px) translateX(10px);
+          right: -45px; top: 25px;
+     }
+}
+
+@media (max-width: 575.98px) { /* Telas Pequenas (smartphones) */
+     .pricing-section-enhanced { padding: 60px 0; }
+     .section-title { font-size: 2rem; }
+     .guarantee-text { font-size: 1rem; }
+     .price-display .amount { font-size: 3rem; }
+     .price-display .currency,
+     .price-display .cents { font-size: 1.3rem; }
+     .pricing-card-enhanced { padding: 25px; border-radius: 20px; }
+     .btn-subscribe-enhanced { padding: 14px 20px; font-size: 0.95rem; }
+     .features-list li { font-size: 0.9rem; margin-bottom: 14px;}
+      .popular-ribbon {
+         width: 100px; height: 100px;
+     }
+     .popular-ribbon span {
+         width: 140px; padding: 6px 0; font-size: 0.7rem;
+          transform: rotate(45deg) translateY(-30px) translateX(10px);
+          right: -40px; top: 20px;
+     }
+}

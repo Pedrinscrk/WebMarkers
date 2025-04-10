@@ -1,0 +1,13 @@
+<footer>
+    <div class="container">
+        <p>&copy; {{year}} {{siteName}}. All rights reserved.</p>
+        <p>Powered by <a href="https://www.example.com">Example</a></p>
+    </div>
+    <script src="{{asset 'js/footer.js'}}"></script>
+    {{#if showAnalytics}}
+        <script async src="https://www.google-analytics.com/analytics.js"></script>
+    {{/if}}
+    {{#if showAds}}
+        <script async src="https://www.example.com/ads.js"></script>
+    {{/if}}
+</footer>
