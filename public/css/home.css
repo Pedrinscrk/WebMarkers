@@ -479,14 +479,7 @@ body {
     --font-primary: 'Poppins', sans-serif;
 }
 
-body {
-    background-color: var(--bg-color);
-    background-image: linear-gradient(to bottom, var(--bg-color), #0a051a);
-    color: var(--text-light);
-    font-family: var(--font-primary);
-    line-height: 1.7;
-    overflow-x: hidden; /* Evita scroll horizontal caso algo escape */
-}
+
 
 /* === Seção Principal === */
 .pricing-section-enhanced {
@@ -813,4 +806,735 @@ body {
           transform: rotate(45deg) translateY(-30px) translateX(10px);
           right: -40px; top: 20px;
      }
+}
+/* ================================================= */
+/* CSS Completo para a Seção Nossos Serviços       */
+/* (Dark Mode com Imagem de Fundo e Overlay)       */
+/* ================================================= */
+
+/* Variáveis de Cor e Estilo */
+:root {
+    /* Cor principal para detalhes e interações */
+    --cor-detalhe: #00ff88; 
+    
+    /* Fundo das caixas de serviço (ajustado para #080808 conforme último pedido) */
+    /* Se quiser mais contraste com o fundo da página, mude para #1e1e1e ou similar */
+    --cor-caixa-fundo: #080808; 
+
+    /* Borda sutil para as caixas no estado normal */
+    --cor-caixa-borda: #444; 
+
+    /* Cores de texto para bom contraste no fundo escuro */
+    --cor-texto-principal: #f0f0f0; /* Para títulos e destaques */
+    --cor-texto-secundario: #bdbdbd; /* Para parágrafos */
+}
+
+/* Container customizado para centralizar conteúdo */
+.container-custom {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative; /* Garante que o conteúdo fique sobre o overlay */
+    z-index: 2;         /* Define a ordem de empilhamento acima do overlay */
+}
+
+/* Estilos da Seção Principal */
+#nossos-servicos-custom {
+    padding: 80px 0; /* Espaçamento interno vertical */
+    text-align: center; /* Alinha o título ao centro */
+    position: relative; /* Contexto para posicionamento absoluto do overlay */
+    
+    /* Imagem de Fundo */
+    background-image: url('/img/FundoP.png'); /* <<< SUBSTITUA AQUI pelo caminho da sua imagem */
+    background-size: cover;          /* Imagem cobre toda a área */
+    background-position: center center; /* Centraliza a imagem */
+    background-repeat: no-repeat;     /* Imagem não se repete */
+    /* background-attachment: fixed; */ /* Opcional: Efeito parallax */
+    
+    z-index: 1; /* Ordem de empilhamento da seção */
+}
+
+/* Overlay Escuro Semi-Transparente (sobre a imagem, sob o conteúdo) */
+#nossos-servicos-custom::before {
+    content: '';              /* Obrigatório para pseudo-elementos */
+    position: absolute;       /* Posicionamento sobre a imagem */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Cor preta (#080808) com opacidade - ajuste 0.75 conforme necessário */
+    background-color: rgba(8, 8, 8, 0.75); 
+    z-index: -1;             /* Coloca atrás do conteúdo (.container-custom) */
+}
+
+/* Estilos do Título da Seção */
+.titulo-secao-custom {
+    display: inline-block;       /* Ajusta a largura ao conteúdo */
+    padding: 10px 30px;        /* Espaçamento interno */
+    border: 2px solid var(--cor-detalhe); /* Borda com cor de destaque */
+    border-radius: 50px;       /* Bordas totalmente arredondadas */
+    margin-bottom: 50px;       /* Espaço abaixo do título */
+    font-size: 2rem;           /* Tamanho da fonte */
+    font-weight: 600;          /* Peso da fonte */
+    color: var(--cor-texto-principal); /* Cor do texto clara */
+    /* background-color: rgba(8, 8, 8, 0.5); */ /* Opcional: Fundo leve para mais destaque */
+    /* backdrop-filter: blur(2px); */          /* Opcional: Efeito de desfoque (suporte limitado) */
+}
+
+/* Grid para os Serviços (usando Flexbox) */
+.servicos-grid {
+    display: flex;             /* Ativa o Flexbox */
+    flex-wrap: wrap;           /* Permite que os itens quebrem a linha */
+    justify-content: center;   /* Centraliza os itens na linha */
+    gap: 30px;                 /* Espaço entre as caixas */
+}
+
+/* Estilos das Caixas de Serviço Individuais */
+.caixa-servico-custom {
+    background-color: var(--cor-caixa-fundo); /* Fundo da caixa (#080808 ou outro) */
+    padding: 30px;             /* Espaçamento interno */
+    border-radius: 8px;        /* Bordas arredondadas */
+    border: 1px solid var(--cor-caixa-borda); /* Borda sutil (#444) */
+    text-align: center;        /* Centraliza o texto */
+    
+    /* Dimensionamento Flexbox */
+    flex: 1 1 300px;           /* Base de 300px, cresce/encolhe */
+    max-width: 350px;          /* Largura máxima */
+    
+    /* Layout interno Flexbox */
+    display: flex;
+    flex-direction: column;    /* Conteúdo empilhado verticalmente */
+    align-items: center;       /* Alinha itens ao centro horizontalmente */
+    
+    /* Transições suaves para efeitos de hover */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: none;          /* Remove sombra padrão escura */
+}
+
+/* Efeitos ao Passar o Mouse Sobre a Caixa */
+.caixa-servico-custom:hover {
+    transform: translateY(-5px); /* Leve elevação */
+    border-color: var(--cor-detalhe); /* Muda a cor da borda */
+    /* Adiciona um brilho sutil com a cor de destaque */
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2); 
+}
+
+/* Estilos dos Ícones (Bootstrap Icons) */
+.caixa-servico-custom i.bi {
+    font-size: 2.8rem;         /* Tamanho do ícone */
+    color: var(--cor-detalhe);   /* Cor de destaque */
+    margin-bottom: 20px;       /* Espaço abaixo do ícone */
+}
+
+/* Estilos do Título Dentro da Caixa */
+.caixa-servico-custom h4 {
+    font-size: 1.3rem;         /* Tamanho da fonte */
+    margin-bottom: 15px;       /* Espaço abaixo */
+    color: var(--cor-texto-principal); /* Cor clara */
+}
+
+/* Estilos do Texto Descritivo Dentro da Caixa */
+.caixa-servico-custom p {
+    color: var(--cor-texto-secundario); /* Cor cinza claro */
+    font-size: 0.95rem;        /* Tamanho da fonte */
+    flex-grow: 1;              /* Permite que o parágrafo cresça (útil para alinhamento) */
+}
+
+/* Estilos para Texto em Negrito Dentro do Parágrafo */
+.caixa-servico-custom p strong {
+     color: var(--cor-texto-principal); /* Cor clara (igual aos títulos) */
+     font-weight: 600;          /* Garante o peso da fonte */
+ }
+
+
+/* Estilos da Seção Landing Page */
+#landing-page-section {
+    padding: 120px 0;
+    background-color: #080808;
+    color: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px; /* Bordas arredondadas */
+}
+
+.landing-page-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilos do Texto */
+.landing-page-text {
+    flex: 1;
+    padding-right: 70px;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+.landing-page-text h2 {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.landing-page-text .intro {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.landing-page-text .details {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-top: 30px;
+}
+
+.landing-page-text .cta-button {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: #00ff88;
+    color: #080808;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições para hover */
+    margin-top: 15px;
+}
+
+.landing-page-text .cta-button:hover {
+    transform: translateY(-5px); /* Leve elevação */
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); /* Sombra suave */
+}
+
+/* Linha Divisória */
+.landing-page-divider {
+    width: 2px;
+    height: 80%;
+    background-color: #444;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+/* Estilos da Imagem */
+.landing-page-image {
+    flex: 1;
+    text-align: right;
+    position: relative;
+    z-index: 11;
+}
+
+.landing-page-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Cortinas */
+.curtain {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #080808;
+    z-index: 9;
+    transition: transform 0.8s ease-in-out;
+}
+
+.curtain-left {
+    left: 0;
+    transform: translateX(0);
+}
+
+.curtain-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+/* Benefícios com Ícones */
+.benefits {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.benefit {
+    text-align: center;
+}
+
+.benefit i.bi {
+    font-size: 3rem;
+    color: #00ff88;
+    margin-bottom: 15px;
+}
+
+.benefit h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.benefit p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Gradiente de Imagens */
+.image-gradient {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.image-gradient img {
+    max-width: 95%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.image-gradient img:hover {
+    transform: scale(1.05);
+}
+
+
+/* Animações */
+.animate-on-scroll .curtain-left {
+    transform: translateX(-100%);
+}
+
+.animate-on-scroll .curtain-right {
+    transform: translateX(100%);
+}
+
+.animate-on-scroll .landing-page-text > * {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-on-scroll .landing-page-image img {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-on-scroll .landing-page-divider {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .landing-page-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .landing-page-text {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .landing-page-image {
+        text-align: center;
+    }
+
+    .landing-page-divider {
+        display: none;
+    }
+}
+
+
+
+#landing-page-section-sites-2 {
+    padding: 120px 0;
+    background-color: #080808;
+    color: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+#landing-page-section-sites-2 .landing-page-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#landing-page-section-sites-2 .landing-page-text {
+    flex: 1;
+    padding-left: 70px;
+    position: relative;
+    letter-spacing: 0.5px;
+    z-index: 12;
+}
+
+#landing-page-section-sites-2 .landing-page-text h2 {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+#landing-page-section-sites-2 .landing-page-text .intro {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+#landing-page-section-sites-2 .landing-page-text .details {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-top: 30px;
+}
+
+#landing-page-section-sites-2 .landing-page-text .cta-button {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: #00ff88;
+    color: #080808;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 15px;
+}
+
+#landing-page-section-sites-2 .landing-page-text .cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+}
+
+#landing-page-section-sites-2 .landing-page-image {
+    flex: 1;
+    text-align: left;
+    position: relative;
+    z-index: 11;
+}
+
+#landing-page-section-sites-2 .landing-page-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+#landing-page-section-sites-2 .benefits {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+#landing-page-section-sites-2 .benefit {
+    text-align: center;
+}
+
+#landing-page-section-sites-2 .benefit i.bi {
+    font-size: 3rem;
+    color: #00ff88;
+    margin-bottom: 15px;
+}
+
+#landing-page-section-sites-2 .benefit h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#landing-page-section-sites-2 .benefit p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+#landing-page-section-sites-2 .image-gradient {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#landing-page-section-sites-2 .image-gradient img {
+    max-width: 100%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+#landing-page-section-sites-2 .image-gradient img:hover {
+    transform: scale(1.05);
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #landing-page-section-sites-2 .landing-page-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #landing-page-section-sites-2 .landing-page-text {
+        padding-left: 0;
+        margin-bottom: 40px;
+    }
+
+    #landing-page-section-sites-2 .landing-page-image {
+        text-align: center;
+    }
+}
+#comment-carousel {
+    background-image: url('/img/FundoP2.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+  }
+  
+  .carousel-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding: 6px 12px;
+    border: 2px solid #00ff88;
+    border-radius: 16px;
+  }
+  
+  .carousel-container {
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    margin: 3px 0;
+  }
+  
+  .carousel-track {
+    display: flex;
+    animation: scroll 60s linear infinite;
+  }
+  
+  .comment {
+    flex: 0 0 auto;
+    width: 320px;
+    padding: 25px;
+    background-color: #080808;
+    border: 1px solid white;
+    border-radius: 7px;
+    margin: 10px; /* Aumenta a margem entre os comentários */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    z-index: 1;
+  }
+  
+  .comment:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+  }
+  
+  .comment img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .comment p {
+    font-size: 1.05em;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: #e0e0e0;
+  }
+  
+  .comment span {
+    font-style: italic;
+    color: #bbb;
+    font-size: 0.85em;
+  }
+  
+  .comment .star-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 4px;
+  }
+  
+  .comment .star-icon {
+    color: #ffc107;
+    font-size: 1.05em;
+    margin: 0 2px;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+
+  /* Estilos gerais da seção */
+.secao-principal {
+    padding: 60px 20px;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-image: url('/img/Fundo.png'); /* **IMAGEM DE FUNDO AQUI** */
+}
+
+/* Container principal */
+.secao-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Container da imagem */
+.imagem-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo da imagem principal */
+.imagem-destaque {
+    width: 500px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Bloco de texto sobre nós */
+.sobre-nos-bloco {
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    margin-top: -30px;
+    border: 2px solid #00ff88; /* Adicionando a borda */
+}
+
+/* Título "Sobre nós" */
+.sobre-nos-titulo {
+    color: #00ff88;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Texto "Sobre nós" */
+.sobre-nos-texto {
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+/* Container das tecnologias */
+.tecnologias-container {
+    margin-top: 60px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Grid das tecnologias */
+.tecnologias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Item da tecnologia */
+.tecnologia-item {
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    padding: 15px 10px;
+    text-align: center;
+}
+
+/* Ícone da tecnologia */
+.tecnologia-icone {
+    font-size: 1.8em;
+    color: #00ff88;
+}
+
+/* Título da tecnologia */
+.tecnologia-titulo {
+    margin-top: 8px;
+    font-size: 0.95rem;
+}
+
+/* Media query para telas menores (ex: tablets e celulares) */
+@media (max-width: 768px) {
+    .imagem-destaque {
+        width: 300px; /* Reduz a largura da imagem principal em telas menores */
+        height: auto; /* Mantém a proporção da altura */
+    }
+
+    .sobre-nos-bloco {
+        flex-direction: column; /* Empilha o título e o texto em telas menores */
+        align-items: center;
+        text-align: center;
+    }
+
+    .sobre-nos-bloco > div {
+        margin-right: 0; /* Remove a margem à direita no layout vertical */
+        width: 100%;
+    }
+
+    .sobre-nos-titulo {
+        font-size: 1.7rem;
+    }
+
+    .sobre-nos-texto {
+        font-size: 1rem;
+    }
+}
+
+/* Media query para telas ainda menores (celulares) */
+@media (max-width: 480px) {
+    .imagem-destaque {
+        width: 200px; /* Reduz ainda mais a largura em telas de celular */
+    }
+
+    .secao-principal {
+        padding: 40px 15px; /* Reduz o padding em telas menores */
+    }
+
+    .imagem-container {
+        margin-bottom: 15px;
+        gap: 15px;
+    }
+
+    .tecnologias-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Colunas menores em telas muito pequenas */
+        gap: 10px;
+    }
+
+    .tecnologia-icone {
+        font-size: 1.5em;
+    }
+
+    .tecnologia-titulo {
+        font-size: 0.85rem;
+    }
 }

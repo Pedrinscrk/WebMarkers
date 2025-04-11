@@ -9,11 +9,10 @@
     --primary-bg: #000000;
     --text-light: #ffffff;
     --accent-color: #00ff88;
-    --transition: all 0.3s ease;
+    --general-transition: all 0.3s ease; /* Renomeado para clareza */
+    --link-hover-transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0); /* Transição específica e fluida para o hover do link */
     --header-height: 80px; /* Variável para a altura do header */
 }
-
-
 
 /* Navbar */
 .navbar {
@@ -31,7 +30,7 @@
     border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
     backdrop-filter: blur(10px);
-    transition: var(--transition);
+    transition: background-color 0.3s ease, border-bottom 0.3s ease; /* Transições específicas */
 }
 
 /* Logo */
@@ -71,25 +70,31 @@
     color: var(--text-light);
     font-size: 1rem;
     font-weight: 500;
-    transition: var(--transition);
+    /* Transição apenas da cor */
+    transition: color 0.3s ease;
     padding: 5px 0;
     white-space: nowrap; /* Evita quebra de linha nos links */
+    position: relative; /* Necessário para o ::after */
+    overflow: hidden;   /* Para garantir que ::after não "vaze" */
 }
 
+/* Efeito Hover Fluido com ::after */
 .menu-links a::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -5px; /* Posição do sublinhado */
     left: 0;
-    width: 0;
-    height: 2px;
+    width: 100%; /* Largura total */
+    height: 2px;  /* Espessura do sublinhado */
     background: var(--accent-color);
-    transition: var(--transition);
+    transform: scaleX(0); /* Começa escondido (escala 0) */
+    transform-origin: left; /* Animação começa da esquerda */
+    transition: var(--link-hover-transition); /* Usa a transição fluida definida na variável */
 }
 
 .menu-links a:hover::after,
 .menu-links a:focus::after { /* Adiciona foco para acessibilidade */
-    width: 100%;
+    transform: scaleX(1); /* Mostra o sublinhado (escala 100%) */
 }
 
 .menu-links a:hover,
@@ -108,7 +113,8 @@
     font-size: 0.95rem; /* Leve ajuste no tamanho da fonte */
     font-weight: 600;
     cursor: pointer;
-    transition: var(--transition);
+    /* Usar transições específicas em vez de 'all' é geralmente melhor */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     letter-spacing: 0.5px;
     white-space: nowrap; /* Evita quebra de linha no botão */
     text-align: center; /* Garante centralização */
@@ -126,12 +132,11 @@
 .navbar-toggler {
     display: none; /* Escondido por padrão (Desktop) */
     background: transparent;
-    border: none; /* Removido borda padrão, pode ser estilizada se necessário */
+    border: none; /* Removido borda padrão */
     padding: 0.5rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: opacity 0.3s ease; /* Transição para o toggler */
     z-index: 1001; /* Garante que fique acima do menu */
-    /* Adiciona box-sizing explicitamente (embora o * já faça) */
     box-sizing: border-box;
 }
 
@@ -164,6 +169,10 @@
         gap: 1rem; /* Reduz mais o gap */
         font-size: 0.95rem; /* Reduz fonte dos links */
     }
+    /* Ajuste no ::after para manter a posição relativa à fonte menor */
+    .menu-links a::after {
+       bottom: -4px; /* Ajuste fino se necessário */
+    }
     .btn-orcamento {
         padding: 8px 20px;
         font-size: 0.9rem;
@@ -174,7 +183,6 @@
 @media (max-width: 768px) {
     .navbar {
         padding: 15px 20px; /* Padding para mobile */
-        /* flex-wrap: nowrap; */ /* Removido - desnecessário com a estrutura atual */
     }
 
     .logo img {
@@ -184,7 +192,6 @@
     .navbar-toggler {
         display: block; /* Mostra o botão hamburguer */
         order: 2; /* Coloca depois do logo */
-        /* margin-left: auto; */ /* Removido - justify-content: space-between no .navbar cuida disso */
     }
 
     .menu-container {
@@ -225,6 +232,7 @@
        padding: 12px 10px; /* Aumenta área de clique */
        border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Linha separadora sutil */
        font-size: 1.1rem; /* Fonte maior para mobile */
+       overflow: visible; /* Reset do overflow no mobile, se necessário */
     }
      .menu-links li:last-child a {
         border-bottom: none; /* Remove borda do último link */
@@ -244,8 +252,7 @@
         width: 100%; /* Botão ocupa largura total */
         padding: 15px 20px; /* Padding maior para toque */
         font-size: 1rem; /* Tamanho de fonte adequado */
-        /* margin-top: 1.5rem; */ /* Adicionado margin-top para garantir espaço */
-                                /* O margin-bottom do .menu-links já deve fazer isso, mas isso reforça */
+        /* margin-top já tratado pelo margin-bottom do .menu-links */
     }
 }
 
