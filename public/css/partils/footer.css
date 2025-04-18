@@ -1,0 +1,207 @@
+/* ================= Footer Estilos ================= */
+.site-footer {
+    background-color: #0a0a0a; /* Um pouco mais escuro que #080808 para diferenciar */
+    color: #a0a0a0; /* Cinza claro para texto padrão */
+    padding: 80px 0 30px 0;
+    font-family: 'Segoe UI', sans-serif; /* Mantendo a fonte */
+    position: relative;
+    overflow: hidden; /* Para conter o efeito neon */
+    border-top: 1px solid #1a1a1a; /* Linha sutil no topo */
+}
+
+/* Efeito sutil de linha neon no topo */
+.footer-efeito-neon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #00e676; /* Cor de destaque */
+    box-shadow: 0 0 10px #00e676, 0 0 20px #00e676, 0 0 30px #00e676;
+    opacity: 0.6;
+    /* Animação sutil (opcional) */
+    animation: pulseNeon 5s infinite ease-in-out;
+}
+
+@keyframes pulseNeon {
+    0%, 100% { opacity: 0.5; box-shadow: 0 0 8px #00e676, 0 0 15px #00e676; }
+    50% { opacity: 0.8; box-shadow: 0 0 12px #00e676, 0 0 25px #00e676; }
+}
+
+
+.site-footer .container {
+    max-width: 1200px; /* Ajuste conforme necessário */
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative; /* Para ficar acima do efeito neon */
+    z-index: 1;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Colunas responsivas */
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-coluna h4 {
+    color: #f5f5f5; /* Branco suave para títulos */
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Linha sutil abaixo dos títulos das colunas */
+.footer-coluna h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #00e676; /* Cor de destaque */
+}
+
+.footer-coluna.footer-sobre .footer-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+    /* Se tiver um logo em imagem: */
+    /* content: url('/img/seu-logo-branco.png'); */
+    /* width: 150px; */
+    /* height: auto; */
+}
+
+.footer-coluna p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.footer-coluna.footer-sobre .footer-local i {
+    color: #00e676;
+    margin-right: 8px;
+}
+
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    position: relative;
+}
+
+.footer-links a:hover {
+    color: #00e676; /* Cor de destaque no hover */
+    padding-left: 5px; /* Efeito sutil de deslocamento */
+}
+
+.footer-contato p {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-contato i {
+    color: #00e676; /* Ícones de contato com destaque */
+    margin-right: 12px;
+    font-size: 1.1rem;
+    width: 20px; /* Alinhamento */
+    text-align: center;
+}
+
+.footer-contato a {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contato a:hover {
+    color: #00e676;
+}
+
+.footer-social {
+    margin-top: 30px;
+}
+.footer-social h4 { /* Reutilizando estilo do título da coluna */
+ color: #f5f5f5; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; font-weight: 600;
+}
+.footer-social h4::after{ content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 2px; background-color: #00e676; }
+
+
+.footer-social a {
+    display: inline-block;
+    color: #a0a0a0;
+    font-size: 1.4rem;
+    margin-right: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #00e676;
+    transform: translateY(-3px); /* Efeito de levantar no hover */
+}
+
+.footer-social a:last-child {
+    margin-right: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #2a2a2a; /* Linha separadora mais escura */
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+.footer-bottom p {
+    margin-bottom: 5px;
+}
+
+.footer-bottom a {
+    color: #a0a0a0;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-bottom a:hover {
+    color: #00e676;
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Empilha as colunas */
+        text-align: center; /* Centraliza o texto nas colunas empilhadas */
+    }
+
+    .footer-coluna h4::after {
+        left: 50%; /* Centraliza a linha abaixo do título */
+        transform: translateX(-50%);
+    }
+
+    .footer-contato p {
+        justify-content: center; /* Centraliza itens de contato */
+    }
+
+    .footer-social a {
+        margin: 0 10px; /* Ajusta margem social */
+    }
+
+     .site-footer {
+        padding: 60px 0 20px 0;
+     }
+}

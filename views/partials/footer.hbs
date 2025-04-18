@@ -1,13 +1,43 @@
-<footer>
+<link rel="stylesheet" href="/css/partils/footer.css">
+<footer class="site-footer">
+    <div class="footer-efeito-neon"></div>
     <div class="container">
-        <p>&copy; {{year}} {{siteName}}. All rights reserved.</p>
-        <p>Powered by <a href="https://www.example.com">Example</a></p>
+        <div class="footer-grid">
+            <div class="footer-coluna footer-sobre">
+                <h3 class="footer-logo">WebMakers</h3>
+                <p>Transformando ideias em realidades digitais de alta performance. Criamos soluções web que impulsionam o seu negócio.</p>
+                 <p class="footer-local"><i class="fas fa-map-marker-alt"></i> Rondonópolis, MT</p>
+            </div>
+
+            <div class="footer-coluna footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#nossos-servicos-custom">Serviços</a></li>
+                    <li><a href="#sobre-nos">Sobre Nós</a></li>
+                    <li><a href="#landing-page-section">Landing Pages</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-coluna footer-contato">
+                <h4>Entre em Contato</h4>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/55XXXXXXXXXXX" target="_blank">(66) 99252-4707</a></p> 
+                <div class="footer-social">
+                    <h4>Siga-nos</h4>
+                    
+                    <a href="https://github.com/Pedrinscrk" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/OsmarAmaral" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>  
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> WebMakers. Todos os direitos reservados.</p>
+        
+        </div>
     </div>
-    <script src="{{asset 'js/footer.js'}}"></script>
-    {{#if showAnalytics}}
-        <script async src="https://www.google-analytics.com/analytics.js"></script>
-    {{/if}}
-    {{#if showAds}}
-        <script async src="https://www.example.com/ads.js"></script>
-    {{/if}}
 </footer>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
